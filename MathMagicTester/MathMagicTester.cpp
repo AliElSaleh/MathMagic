@@ -40,21 +40,33 @@ private:
 
 int main()
 {
-	FVector2D MyVector2D = FVector2D (52.0f, 26.0f);
-	FVector2D OtherVector2D = FVector2D(48.0f, 20.0f);
-	const float Dot = FVector2D::Dot(MyVector2D, OtherVector2D);
+	FVector2D A = FVector2D (0.0f, 0.0f);
+	FVector2D B = FVector2D(50.0f, 50.0f);
+	const float Dot = FVector2D::Dot(A, B);
 
 	printf("Dot: %f\n", Dot);
 	
 	std::cout << "\n";
 
-	const FVector2D Normal = MyVector2D.GetNormal();
-	const FVector2D Perp = MyVector2D.Perpendicular();
-	const float Mag = MyVector2D.Magnitude();
+	const FVector2D Normal = A.GetNormal();
+	const FVector2D Perp = A.Perpendicular();
+	const float Mag = A.Magnitude();
+	const float Distance = FVector2D::Distance(A, B);
+
+	FVector3D C = FVector3D(3.0f);
+	FVector3D D = FVector3D(3.0f);
+
+	if (C == FVector3D(2.99999999999999f))
+		std::cout << "True\n";
+	else
+		std::cout << "False\n";
+
+	std::cout << "\n";
 
 	printf("Perpendicular: X:%f, Y:%f\n", Perp.X, Perp.Y);
 	printf("Normalized: X:%f, Y:%f\n", Normal.X, Normal.Y);
 	printf("Magnitude: %f\n", Mag);
+	printf("Distance: %f\n", Distance);
 
 	std::cout << "\n";
 
