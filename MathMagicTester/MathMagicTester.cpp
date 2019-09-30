@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <chrono>
+#include <algorithm>
 
 #include "../MathMagic/MathMagic.h"
 
@@ -54,25 +55,23 @@ int main()
 	
 	std::cout << "\n";
 
-	printf("Std Ceil:\n");
+	printf("Std Clamp:\n");
 	{
 		Timer Timer;
-		floor(856682.145878961f);
+		std::clamp(6, 0, 10);
 	}
-	printf("%f", floor(856682.145878961f));
+	printf("%i", std::clamp(6, -11, 10));
 
 	std::cout << "\n";
 
-	printf("My Ceil:\n");
+	printf("My Clamp:\n");
 	{
 		Timer Timer;
-		Floor(856682.145878961f);
+		Clamp(6, 0, 10);
 	}
-	printf("%f", Floor(856682.145878961f));
+	printf("%i", Clamp(6, -11, 10));
 
 	std::cout << "\n";
 
 	std::cout << "End\n";
-
-	std::cin.get();
 }

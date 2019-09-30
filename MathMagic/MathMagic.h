@@ -107,6 +107,12 @@ namespace MathMagic
 	}
 
 	template<typename T>
+	T Clamp(const T& Value, const T& Min, const T& Max)
+	{
+		return (Value > Min) && (Value < Max) ? Value : (Value < Min) ? Min : Max;
+	}
+
+	template<typename T>
 	class Vector2D
 	{
 	public:
