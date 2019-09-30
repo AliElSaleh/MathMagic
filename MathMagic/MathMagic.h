@@ -70,12 +70,12 @@ namespace MathMagic
 	template<typename T>
 	T SquareRoot(const T& X) noexcept
 	{
-		float InitialGuess = 1.0f;
+		float Guess = 1.0f; // Initial guess
 
 		for (int i = 0; i < 100; ++i)
-			InitialGuess -= (InitialGuess*InitialGuess - X) / (2*InitialGuess);
+			Guess -= (Guess*Guess - X) / (2*Guess);
 
-		return InitialGuess;
+		return Guess;
 	}
 
 	template<typename T>
