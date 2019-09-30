@@ -2,7 +2,9 @@
 
 #define FLOAT_MIN		1.175494e-38				// Minimum floating-point value
 #define FLOAT_MAX		3.402823e+38				// Maximum floating-point value
-#define FLOAT_EPSILON 1.192093e-07					// Smallest possible floating-point value
+#define FLOAT_EPSILON	1.192093e-07				// Smallest possible floating-point value
+
+#define DOUBLE_MAX		1.797693e+308				// Maximum possible double-precision floating-point value
 
 #define SHORT_MIN    (-32768)						// Minimum (signed) short value
 #define SHORT_MAX      32767						// Maximum (signed) short value
@@ -80,6 +82,28 @@ namespace MathMagic
 	T Abs(const T& X) noexcept
 	{
 		return (X <= 0.0f) ? 0.0f - X : X;
+	}
+
+	template<typename T>
+	T Floor(const T& X) noexcept
+	{
+		if (X > LLONG_MAX || X < LLONG_MIN)
+			return X;
+		
+		const long long& N = (long long)X;
+	    const double D = (double)N;
+
+		return X >= 0 ? (T)D : (T)D -1;
+	}
+
+	template<typename T>
+	T Ceil(const T& X) noexcept
+	{
+		const int& A = X;
+		if ((T)A != X)
+			return A+1;
+
+		return (T)X;
 	}
 
 	template<typename T>
@@ -395,15 +419,15 @@ namespace MathMagic
 		}
 	};
 
-	// Floating-point vector
+	// Floating-point 2D vector
 	typedef Vector2D<float> FVector2D;
 
-	// Double-precision vector
+	// Double-precision 2D vector
 	typedef Vector2D<double> DVector2D;
 
-	// Floating-point vector
+	// Floating-point 3D vector
 	typedef Vector3D<float> FVector3D;
 
-	// Double-precision vector
+	// Double-precision 3D vector
 	typedef Vector3D<double> DVector3D;
 }
