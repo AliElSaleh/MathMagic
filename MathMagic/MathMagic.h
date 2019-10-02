@@ -1,18 +1,6 @@
 #pragma once
 
-#ifndef HAS_CPP17
- #ifdef _MSVC_LANG
-
-	#if _MSVC_LANG > 201402L
-		#define HAS_CPP17	1
-		#define NO_DISCARD [[nodiscard]]
-	#else
-		#define _HAS_CXX17	0
-	#endif /* _MSVC_LANG > 201402L */
-
-#endif /* _MSVC_LANG */
-#endif /* HAS_CPP17 */
-
+#include <chrono>
 
 #define FLOAT_MIN		1.175494e-38				// Minimum floating-point value
 #define FLOAT_MAX		3.402823e+38				// Maximum floating-point value
@@ -155,7 +143,7 @@ namespace MathMagic
 	}
 
 	template<typename T>
-	constexpr const T& Normalize(const T& Value, const T& Min, const T& Max)
+	constexpr T Normalize(const T& Value, const T& Min, const T& Max)
 	{
 		return (Value - Min) / (Max - Min);
 	}
@@ -183,6 +171,28 @@ namespace MathMagic
 	constexpr const T& Distance3D(const T& X0, const T& Y0, const T& Z0, const T& X1, const T& Y1, const T& Z1)
 	{
 		return SquareRoot((X1-X0)*(X1-X0) + (Y1-Y0)*(Y1-Y0) + (Z1-Z0)*(Z1-Z0));
+	}
+
+	long long Random()
+	{
+		return (48271 * std::chrono::high_resolution_clock::now().time_since_epoch().count() + 1) % INT_MAX;
+	}
+
+	const int& RandomRange(const int& Min, const int& Max)
+	{
+		return Floor(Min + Random() % 1000/1000.0f * (Max - Min + 1));
+	}
+
+	template<typename T>
+	constexpr const T& FRandomRange(const T& Min, const T& Max)
+	{
+		return Min + Random() % 1000/1000.0f * (Max - Min);
+	}
+
+	template<typename T>
+	constexpr bool IsNearlyEqual(const T& Value, const T& Target, const T& Tolerance = FLOAT_EPSILON)
+	{
+		return Abs(Value) == Target - Tolerance;
 	}
 
 	template<typename T>
@@ -365,10 +375,7 @@ namespace MathMagic
 		// Check against another vector for equality, within specified error limits.
 		bool Equals(Vector2D<T>& B, const T& Tolerance = FLOAT_EPSILON)
 		{
-			if (Abs(X - B.X) < Tolerance && Abs(Y - B.Y) < Tolerance)
-				return true;
-
-			return false;
+			return (Abs(X - B.X) < Tolerance && Abs(Y - B.Y) < Tolerance);
 		}
 
 		// Check vector A against vector B for equality, within specified error limits.
