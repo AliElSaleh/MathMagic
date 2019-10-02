@@ -38,6 +38,12 @@
 #define INT32_MAX      2147483647i32				// Maximum signed 32 bit value
 #define UINT32_MAX     0xffffffffui32				// Maximum unsigned 32 bit value
 
+
+#define PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
+
+#define DEG2RAD(X) (X / 180.0 * PI)
+#define RAD2DEG(X) (X * 180.0 / PI)
+
 namespace MathMagic
 {
 	typedef signed char			int8;
@@ -178,21 +184,55 @@ namespace MathMagic
 		return (48271 * std::chrono::high_resolution_clock::now().time_since_epoch().count() + 1) % INT_MAX;
 	}
 
-	const int& RandomRange(const int& Min, const int& Max)
+	const int& RandRange(const int& Min, const int& Max)
 	{
 		return Floor(Min + Random() % 1000/1000.0f * (Max - Min + 1));
 	}
 
-	template<typename T>
-	constexpr const T& FRandomRange(const T& Min, const T& Max)
+	const float& FRandRange(const float& Min, const float& Max)
 	{
 		return Min + Random() % 1000/1000.0f * (Max - Min);
+	}
+
+	template<typename T>
+	constexpr const T& RandDistribution(const T& Min, const T& Max, const T& Iterations)
+	{
+		uint32 Total = 0;
+
+		for (uint32 i = 0; i < Iterations; ++i)
+			Total += RandRange(Min, Max);
+
+		return Total / Iterations;
 	}
 
 	template<typename T>
 	constexpr bool IsNearlyEqual(const T& Value, const T& Target, const T& Tolerance = FLOAT_EPSILON)
 	{
 		return Abs(Value) == Target - Tolerance;
+	}
+
+	template<typename T>
+	constexpr const T& DegreesToRadians(const T& Degrees)
+	{
+		return Degrees / 180.0f * PI;
+	}
+
+	template<typename T>
+	constexpr const T& RadiansToDegrees(const T& Radians)
+	{
+		return Radians * 180.0f / PI;
+	}
+
+	template<typename T>
+	constexpr const T& Round(const T& Value)
+	{
+		return Value < 0.0f ? int(Value - 0.5f) : int(Value + 0.5f);
+	}
+
+	template<typename T>
+	constexpr const T& SnapToGrid(const T& Value, const T& GridSize)
+	{
+		return Round(Value / GridSize) * GridSize;
 	}
 
 	template<typename T>

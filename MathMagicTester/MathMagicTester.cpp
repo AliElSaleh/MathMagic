@@ -65,7 +65,7 @@ int main()
 	std::cout << "\n";
 
 	float X = 0.0f;
-	int Y = 0.0f;
+	int Y = 0;
 
 	std::cout << "\n";
 
@@ -78,6 +78,12 @@ int main()
 		//X = Normalize(20, 10, 30);
 		//X = Distance2D(1.0f, 1.0f, 5.0f, 5.0f);
 		//X = Distance3D(1.0f, 1.0f, 1.0f, 5.0f, 5.0f, 5.0f);
+
+		for (int i = 0; i < 100; ++i)
+		{
+			X = RandDistribution(0, 100, 20);
+			printf("%f\n", X);
+		}
 	}
 
 	//printf("%i\n", Normalize(20, 10, 30));
