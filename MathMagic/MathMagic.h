@@ -137,6 +137,12 @@ namespace MathMagic
 	}
 
 	template<typename T>
+	constexpr const T& Lerp(const T& A, const T& B, const T& Alpha)
+	{
+		return (Alpha <= 0.0f) ? A : (Alpha >= 1.0f) ? B : A + Alpha * (B - A);
+	}
+
+	template<typename T>
 	class Vector2D
 	{
 	public:

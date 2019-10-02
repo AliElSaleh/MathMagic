@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <chrono>
-#include <algorithm>
 
 #include "../MathMagic/MathMagic.h"
 
@@ -34,11 +33,11 @@ public:
 	{
 		const auto& EndTimePoint = std::chrono::high_resolution_clock::now();
 
-		const long long& Duration = std::chrono::duration_cast<attoseconds>(EndTimePoint - StartTimePoint).count();
+		const long long& Duration = std::chrono::duration_cast<picoseconds>(EndTimePoint - StartTimePoint).count();
 
-		const double& US = Duration * 0.000000000001;
+		const double& US = Duration * 0.000001;
 
-		printf("Duration %lld as, %f us\n", Duration, US);
+		printf("Duration %lld ps, %f us\n", Duration, US);
 	}
 
 private:
@@ -55,21 +54,27 @@ int main()
 
 	std::cout << "\n";
 
-	printf("Std Clamp:\n");
-	{
-		Timer Timer;
-		std::clamp(-12, -11, 10);
-	}
-	printf("%i", std::clamp(-12, -11, 10));
+	//printf("Std Lerp:\n");
+	//{
+	//	Timer Timer;
+	//	std::lerp(-12, -11, 10);
+	//}
+	//printf("%i", std::lerp(-12, -11, 10));
 
 	std::cout << "\n";
 
-	printf("My Clamp:\n");
+		float X = 0.0f;
+	printf("My Lerp:\n");
 	{
 		Timer Timer;
-		Clamp(-12, -11, 10);
+
+		for (float i = 0.0f; i < 1.0f; i+=0.001f)
+		{
+			X = Lerp(0.0f, 10.0f, i);
+		}
 	}
-	printf("%i", Clamp(-12, -11, 10));
+		printf("%f\n", X);
+	//printf("%i", Clamp(-12, -11, 10));
 
 	std::cout << "\n";
 
