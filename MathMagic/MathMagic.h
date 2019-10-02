@@ -172,6 +172,19 @@ namespace MathMagic
 		return Lerp(OutRangeMin, OutRangeMax, Normalize(Value, InRangeMin, InRangeMax));
 	}
 
+	// Returns the distance between two-points
+	template<typename T>
+	constexpr const T& Distance2D(const T& X0, const T& Y0, const T& X1, const T& Y1)
+	{
+		return SquareRoot((X1-X0)*(X1-X0) + (Y1-Y0)*(Y1-Y0));
+	}
+
+	template<typename T>
+	constexpr const T& Distance3D(const T& X0, const T& Y0, const T& Z0, const T& X1, const T& Y1, const T& Z1)
+	{
+		return SquareRoot((X1-X0)*(X1-X0) + (Y1-Y0)*(Y1-Y0) + (Z1-Z0)*(Z1-Z0));
+	}
+
 	template<typename T>
 	class Vector2D
 	{
@@ -338,7 +351,7 @@ namespace MathMagic
 		}
 
 		// Euclidean distance between two points
-		static T Distance(Vector2D<T>& A, Vector2D<T>& B)
+		static T Distance(Vector2D<T> A, Vector2D<T> B)
 		{
 			return SquareRoot((B.X - A.X)*(B.X - A.X) + (B.Y - A.Y)*(B.Y - A.Y));
 		}

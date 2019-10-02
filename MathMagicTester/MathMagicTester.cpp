@@ -71,7 +71,9 @@ int main()
 		
 		//X = MapClamped(19.0f, 20.0f, 50.0f, 30.0f, 100.0f);
 		//X = Lerp(0.0f, 20.0f, 0.5f);
-		X = Normalize(0.0f, 10.0f, 30.0f);
+		//X = Normalize(0.0f, 10.0f, 30.0f);
+		//X = Distance2D(1.0f, 1.0f, 5.0f, 5.0f);
+		//X = Distance3D(1.0f, 1.0f, 1.0f, 5.0f, 5.0f, 5.0f);
 	}
 	printf("%f\n", X);
 
