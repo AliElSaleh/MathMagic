@@ -1,5 +1,19 @@
 #pragma once
 
+#ifndef HAS_CPP17
+ #ifdef _MSVC_LANG
+
+	#if _MSVC_LANG > 201402L
+		#define HAS_CPP17	1
+		#define NO_DISCARD [[nodiscard]]
+	#else
+		#define _HAS_CXX17	0
+	#endif /* _MSVC_LANG > 201402L */
+
+#endif /* _MSVC_LANG */
+#endif /* HAS_CPP17 */
+
+
 #define FLOAT_MIN		1.175494e-38				// Minimum floating-point value
 #define FLOAT_MAX		3.402823e+38				// Maximum floating-point value
 #define FLOAT_EPSILON	1.192093e-07				// Smallest possible floating-point value
@@ -38,6 +52,16 @@
 
 namespace MathMagic
 {
+	typedef signed char			int8;
+	typedef signed short		int16;
+	typedef signed int			int32;
+	typedef signed long long	int64;
+
+	typedef unsigned char		uint8;
+	typedef unsigned short		uint16;
+	typedef unsigned int		uint32;
+	typedef unsigned long long	uint64;
+
 	// Returns A + B
 	template<typename T>
 	T Add(const T& A, const T& B)
@@ -107,9 +131,9 @@ namespace MathMagic
 	}
 
 	template<typename T>
-	T Clamp(const T& Value, const T& Min, const T& Max)
+	constexpr const T& Clamp(const T& Value, const T& Min, const T& Max)
 	{
-		return (Value > Min) && (Value < Max) ? Value : (Value < Min) ? Min : Max;
+		return Value < Min ? Min : Value > Max ? Max : Value;
 	}
 
 	template<typename T>

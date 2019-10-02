@@ -52,24 +52,24 @@ int main()
 	const float Dot = FVector2D::Dot(A, B);
 
 	printf("Dot: %f\n", Dot);
-	
+
 	std::cout << "\n";
 
 	printf("Std Clamp:\n");
 	{
 		Timer Timer;
-		std::clamp(6, 0, 10);
+		std::clamp(-12, -11, 10);
 	}
-	printf("%i", std::clamp(6, -11, 10));
+	printf("%i", std::clamp(-12, -11, 10));
 
 	std::cout << "\n";
 
 	printf("My Clamp:\n");
 	{
 		Timer Timer;
-		Clamp(6, 0, 10);
+		Clamp(-12, -11, 10);
 	}
-	printf("%i", Clamp(6, -11, 10));
+	printf("%i", Clamp(-12, -11, 10));
 
 	std::cout << "\n";
 
