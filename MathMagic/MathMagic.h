@@ -137,15 +137,39 @@ namespace MathMagic
 	}
 
 	template<typename T>
+	constexpr const T& LerpClamped(const T& A, const T& B, const T& Alpha)
+	{
+		return Clamp(A + Alpha * (B - A), A, B);
+	}
+
+	template<typename T>
 	constexpr const T& Lerp(const T& A, const T& B, const T& Alpha)
 	{
-		return (Alpha <= 0.0f) ? A : (Alpha >= 1.0f) ? B : A + Alpha * (B - A);
+		return A + Alpha * (B - A);
+	}
+
+	template<typename T>
+	constexpr const T& NormalizeClamped(const T& Value, const T& Min, const T& Max)
+	{
+		return Clamp((Value - Min) / (Max - Min), 0.0f, 1.0f);
 	}
 
 	template<typename T>
 	constexpr const T& Normalize(const T& Value, const T& Min, const T& Max)
 	{
-		return Value <= Min ? Min : Value >= Max ? Max : (Value - Min) / (Max - Min);
+		return (Value - Min) / (Max - Min);
+	}
+
+	template<typename T>
+	constexpr const T& MapClamped(const T& Value, const T& InRangeMin, const T& InRangeMax, const T& OutRangeMin, const T& OutRangeMax)
+	{
+		return Clamp(Lerp(OutRangeMin, OutRangeMax, Normalize(Value, InRangeMin, InRangeMax)), OutRangeMin, OutRangeMax);
+	}
+
+	template<typename T>
+	constexpr const T& Map(const T& Value, const T& InRangeMin, const T& InRangeMax, const T& OutRangeMin, const T& OutRangeMax)
+	{
+		return Lerp(OutRangeMin, OutRangeMax, Normalize(Value, InRangeMin, InRangeMax));
 	}
 
 	template<typename T>

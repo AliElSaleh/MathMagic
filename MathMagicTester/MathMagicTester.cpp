@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <chrono>
+#include <cmath>
 
 #include "../MathMagic/MathMagic.h"
 
@@ -64,11 +65,13 @@ int main()
 	std::cout << "\n";
 
 	float X = 0.0f;
-	printf("My Lerp:\n");
+	printf("My Map:\n");
 	{
 		Timer Timer;
-
-		X = Normalize(20.0f, 10.0f, 30.0f);
+		
+		//X = MapClamped(19.0f, 20.0f, 50.0f, 30.0f, 100.0f);
+		//X = Lerp(0.0f, 20.0f, 0.5f);
+		X = Normalize(0.0f, 10.0f, 30.0f);
 	}
 	printf("%f\n", X);
 
