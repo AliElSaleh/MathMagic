@@ -63,17 +63,15 @@ int main()
 
 	std::cout << "\n";
 
-		float X = 0.0f;
+	float X = 0.0f;
 	printf("My Lerp:\n");
 	{
 		Timer Timer;
 
-		for (float i = 0.0f; i < 1.0f; i+=0.001f)
-		{
-			X = Lerp(0.0f, 10.0f, i);
-		}
+		X = Normalize(20.0f, 10.0f, 30.0f);
 	}
-		printf("%f\n", X);
+	printf("%f\n", X);
+
 	//printf("%i", Clamp(-12, -11, 10));
 
 	std::cout << "\n";

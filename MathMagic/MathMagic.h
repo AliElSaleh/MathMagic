@@ -103,13 +103,13 @@ namespace MathMagic
 	}
 
 	template<typename T>
-	T Abs(const T& X) noexcept
+	constexpr const T& Abs(const T& X) noexcept
 	{
 		return (X <= 0.0f) ? 0.0f - X : X;
 	}
 
 	template<typename T>
-	T Floor(const T& X) noexcept
+	constexpr const T& Floor(const T& X) noexcept
 	{
 		if (X > LLONG_MAX || X < LLONG_MIN)
 			return X;
@@ -121,7 +121,7 @@ namespace MathMagic
 	}
 
 	template<typename T>
-	T Ceil(const T& X) noexcept
+	constexpr const T& Ceil(const T& X) noexcept
 	{
 		const int& A = X;
 		if ((T)A != X)
@@ -133,13 +133,19 @@ namespace MathMagic
 	template<typename T>
 	constexpr const T& Clamp(const T& Value, const T& Min, const T& Max)
 	{
-		return Value < Min ? Min : Value > Max ? Max : Value;
+		return Value <= Min ? Min : Value >= Max ? Max : Value;
 	}
 
 	template<typename T>
 	constexpr const T& Lerp(const T& A, const T& B, const T& Alpha)
 	{
 		return (Alpha <= 0.0f) ? A : (Alpha >= 1.0f) ? B : A + Alpha * (B - A);
+	}
+
+	template<typename T>
+	constexpr const T& Normalize(const T& Value, const T& Min, const T& Max)
+	{
+		return Value <= Min ? Min : Value >= Max ? Max : (Value - Min) / (Max - Min);
 	}
 
 	template<typename T>
