@@ -1,12 +1,8 @@
 #include <iostream>
 
-#include <chrono>
-#include <cmath>
-
-#include "../MathMagic/MathMagic.h"
+#include "MathMagic.h"
 
 using namespace MathMagic;
-
 
 typedef std::ratio<1, 1000000000000> pico;
 typedef std::chrono::duration<long long, pico> picoseconds;
@@ -47,21 +43,6 @@ private:
 
 int main()
 {
-	FVector2D A = FVector2D (0.0f, 0.0f);
-	FVector2D B = FVector2D(50.0f, 50.0f);
-	const float Dot = FVector2D::Dot(A, B);
-
-	printf("Dot: %f\n", Dot);
-
-	std::cout << "\n";
-
-	//printf("Std Lerp:\n");
-	//{
-	//	Timer Timer;
-	//	std::lerp(-12, -11, 10);
-	//}
-	//printf("%i", std::lerp(-12, -11, 10));
-
 	std::cout << "\n";
 
 	float X = 0.0f;
@@ -78,17 +59,10 @@ int main()
 		//X = Normalize(20, 10, 30);
 		//X = Distance2D(1.0f, 1.0f, 5.0f, 5.0f);
 		//X = Distance3D(1.0f, 1.0f, 1.0f, 5.0f, 5.0f, 5.0f);
-
-		for (int i = 0; i < 100; ++i)
-		{
-			X = RandDistribution(0, 100, 20);
-			printf("%f\n", X);
-		}
+		X = Sin(30.0f);
 	}
 
-	//printf("%i\n", Normalize(20, 10, 30));
-
-	//printf("%i", Clamp(-12, -11, 10));
+	printf("%f\n", X);
 
 	std::cout << "\n";
 
